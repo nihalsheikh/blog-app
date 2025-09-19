@@ -11,7 +11,7 @@ function Header() {
 	const navItems = [
 		{
 			name: "Home",
-			slug: "/", // you can also call this URL
+			slug: "/", // you can also call slug as URL
 			active: true,
 		},
 		{
