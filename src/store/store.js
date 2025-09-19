@@ -1,4 +1,4 @@
-// Reduc: Store and Reducers
+// Redux: Store and Reducers
 import { configureStore } from "@reduxjs/toolkit";
 
 const store = configureStore({
