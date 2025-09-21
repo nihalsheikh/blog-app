@@ -9,6 +9,7 @@ import Input from "./Input";
 import Login from "./Login";
 import Logo from "./Logo";
 import Select from "./Select";
+import RTE from "./RTE";
 
 export {
 	Container,
@@ -21,4 +22,5 @@ export {
 	Login,
 	Logo,
 	Select,
+	RTE,
 };
