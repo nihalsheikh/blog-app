@@ -2,14 +2,19 @@
 import React from "react";
 import service from "../appwrite/config";
 import { Link } from "react-router-dom";
+import previewImage from "../assets/previewImage.png"
 
 function Card({ $id, title, featuredImage }) {
+	const imageSrc = featuredImage
+		? service.getFilePreview(featuredImage)
+		: previewImage;
+
 	return (
 		<Link to={`/post/${$id}`}>
 			<div className="w-full bg-gray-100 rounded-xl p-4">
 				<div className="w-full justify-center mb-4">
 					<img
-						src={service.getFilePreview(featuredImage)}
+						src={imageSrc}
 						alt={title}
 						className="rounded-xl"
 					/>
