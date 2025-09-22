@@ -10,7 +10,7 @@ function PostForm({ post }) {
 		useForm({
 			defaultValues: {
 				title: post?.title || "",
-				slug: post?.slug || "",
+				slug: post?.$id || "",
 				content: post?.content || "",
 				status: post?.status || "active",
 			},
@@ -18,7 +18,7 @@ function PostForm({ post }) {
 
 	const navigate = useNavigate();
 
-	const userData = useSelector((state) => state.user.userData);
+	const userData = useSelector((state) => state.auth.userData);
 
 	const submit = async (data) => {
 		if (post) {
