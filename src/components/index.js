@@ -10,6 +10,9 @@ import Login from "./Login";
 import Logo from "./Logo";
 import Select from "./Select";
 import RTE from "./RTE";
+import Signup from "./Signup";
+import PostForm from "./post-form/PostForm";
+
 
 export {
 	Container,
@@ -23,4 +26,6 @@ export {
 	Logo,
 	Select,
 	RTE,
+	Signup,
+	PostForm,
 };
