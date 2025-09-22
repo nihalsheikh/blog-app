@@ -12,7 +12,7 @@ import Select from "./Select";
 import RTE from "./RTE";
 import Signup from "./Signup";
 import PostForm from "./post-form/PostForm";
-
+import AuthLayout from "./AuthLayout";
 
 export {
 	Container,
@@ -28,4 +28,5 @@ export {
 	RTE,
 	Signup,
 	PostForm,
+	AuthLayout,
 };
