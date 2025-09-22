@@ -34,6 +34,7 @@ export class Service {
 			);
 		} catch (error) {
 			console.log("Appwrite service :: createPost :: error", error);
+			throw error;
 		}
 	}
 
@@ -52,6 +53,7 @@ export class Service {
 			);
 		} catch (error) {
 			console.log("Appwrite service :: updatePost :: error", error);
+			throw error;
 		}
 	}
 
@@ -107,7 +109,8 @@ export class Service {
 			);
 		} catch (error) {
 			console.log("Appwrite method :: uploadFile :: error", error);
-			return false;
+			// return false;
+			throw error;
 		}
 	}
 
@@ -121,9 +124,47 @@ export class Service {
 		}
 	}
 
-	getFilePreview(fileId) {
+	getFilePreview(
+		fileId,
+		width = 400,
+		height = 300,
+		gravity = "center",
+		quality = 100
+	) {
 		// this method is not returning a promise, so no need for async-await
-		return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
+		// return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
+		try {
+			if (!fileId) {
+				console.log("No fileId provided for preview");
+				return null;
+			}
+
+			return this.bucket.getFilePreview(
+				conf.appwriteBucketId,
+				fileId,
+				width,
+				height,
+				gravity,
+				quality
+			);
+		} catch (error) {
+			console.log("Appwrite service :: getFilePreview :: error", error);
+			return null;
+		}
+	}
+
+	getFileView(fileId) {
+		try {
+			if (!fileId) {
+				console.warn("No fileId provided for file view");
+				return null;
+			}
+
+			return this.bucket.getFileView(conf.appwriteBucketId, fileId);
+		} catch (error) {
+			console.log("Appwrite service :: getFileView :: error", error);
+			return null;
+		}
 	}
 }
 
