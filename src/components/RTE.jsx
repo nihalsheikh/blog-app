@@ -17,11 +17,11 @@ export default function RTE({ name, control, label, defaultValue = "" }) {
 				render={({ field: { onChange } }) => (
 					<Editor
 						apiKey={conf.tinymceApiKey}
-						// initialValue="Type your content here..."
+						initialValue={defaultValue}
 						init={{
 							menubar: true,
 							branding: false,
-							height: 500,
+							height: 400,
 							plugins: [
 								"image",
 								"advlist",

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import service from "../appwrite/config";
+import appwriteService from "../appwrite/config";
 import { Container, Card } from "../components";
 
 function AllPosts() {
@@ -7,14 +7,13 @@ function AllPosts() {
 
 	useEffect(() => {}, []);
 
-	service
-		.getPost([])
+	appwriteService
+		.getPosts([])
 		.then((posts) => {
 			if (posts) {
 				setPosts(posts.documents);
 			}
 		})
-		.catch((error) => console.log(error));
 
 	return (
 		<div className="w-full py-8">
@@ -22,7 +21,7 @@ function AllPosts() {
 				<div className="flex flex-wrap">
 					{posts.map((post) => (
 						<div key={post.$id} className="p-2 w-1/4">
-							<Card post={post} />
+							<Card {...post} />
 						</div>
 					))}
 				</div>
