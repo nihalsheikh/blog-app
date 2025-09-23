@@ -1,0 +1,18 @@
+[build]
+  # Custom build command that installs Bun and runs build
+  command = "./scripts/build.sh"
+  # Vite output folder
+  publish = "dist"
+  # Skip npm install
+  ignore = "npm install"
+
+[build.environment]
+  # Disable NPM install completely
+  NPM_FLAGS = "--version"
+  NODE_VERSION = "18"
+
+# Redirect rules for React Router
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
