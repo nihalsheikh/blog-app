@@ -1,12 +1,63 @@
-# React + Vite
+# Blog Application 📝
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-featured blog application built with React, featuring user authentication, rich text editing, image uploads, and a modern responsive design. Built with Appwrite as the backend service.
 
-Currently, two official plugins are available:
+## ✨ Features
 
--   [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
--   [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-   **User Authentication** - Secure login and registration system
+-   **Rich Text Editor** - TinyMCE integration for creating beautiful blog posts
+-   **Image Upload** - Featured image support with Appwrite Storage
+-   **Real-time Validation** - Form validation with React Hook Form
+-   **State Management** - Redux for global state management
+-   **Post Management** - Create, read, update, and delete blog posts
+-   **Slug Generation** - Automatic URL-friendly slug creation
+-   **Status Management** - Draft and published post states
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Frontend
+
+-   **React** - Modern JavaScript library for building user interfaces
+-   **Redux Toolkit** - State management
+-   **React Router Dom** - Client-side routing
+-   **React Hook Form** - Form handling and validation
+-   **TinyMCE** - Rich text editor for content creation
+-   **Tailwind CSS** - Utility-first CSS framework
+-   **HTML React Parser** - Parse HTML content safely
+
+### Backend & Services
+
+-   **Appwrite** - Open-source backend as a service
+    -   Authentication
+    -   Storage (File uploads)
+
+## 🔧 Key Features Implementation
+
+### Authentication System
+-   Protected routes using `AuthLayout` component
+-   Redux state management for user sessions
+-   Appwrite authentication integration
+-   Automatic login state persistence
+
+### Image Handling
+-   Appwrite Storage integration for file uploads
+-   Fallback to `getFileView` for free tier compatibility
+-   Image preview functionality
+-   Automatic cleanup of old images when updating posts
+
+### Form Management
+-   React Hook Form for efficient form handling
+-   Real-time validation with user-friendly error messages
+-   Automatic slug generation from post titles
+-   Loading states and progress indicators
+
+### Rich Text Editing
+-   TinyMCE integration for content creation
+-   HTML content parsing for safe rendering
+-   Responsive editor configuration
+
+## 🎨 UI/UX Features
+-   **Loading States** - Smooth user experience with progress indicators
+-   **Error Handling** - User-friendly error messages
+-   **Form Validation** - Real-time feedback for user inputs
+
