@@ -27,11 +27,11 @@ export default function Post() {
 					setLoading(true);
 					setError(null);
 
-					console.log("Fetching post for slug:", slug);
+					// console.log("Fetching post for slug:", slug);
 					const postData = await appwriteService.getPost(slug);
 
 					if (postData) {
-						console.log("Post fetched successfully:", postData);
+						// console.log("Post fetched successfully:", postData);
 						setPost(postData);
 					} else {
 						setError("Post Not Found");
@@ -59,14 +59,11 @@ export default function Post() {
 					setImageLoading(true);
 					setImageError(false);
 
-					console.log(
-						"Fetching full image for post:",
-						post.featuredImage
-					);
+					// console.log("Fetching full image for post:",post.featuredImage);
 
 					// Method 1: Try getFileView with proper await
 					try {
-						console.log("Trying getFileView...");
+						// console.log("Trying getFileView...");
 						const viewResult = await appwriteService.getFileView(
 							post.featuredImage
 						);
@@ -77,10 +74,7 @@ export default function Post() {
 								viewResult.href ||
 								viewResult.toString() ||
 								viewResult;
-							console.log(
-								"Full image URL from getFileView:",
-								url
-							);
+							// console.log("Full image URL from getFileView:",url);
 							setImageUrl(url);
 							setImageLoading(false);
 							return;
@@ -91,7 +85,7 @@ export default function Post() {
 
 					// Method 2: Try getFilePreview as fallback (will likely fail on free plan)
 					try {
-						console.log("Trying getFilePreview as fallback...");
+						// console.log("Trying getFilePreview as fallback...");
 						const previewResult =
 							await appwriteService.getFilePreview(
 								post.featuredImage,
@@ -106,13 +100,10 @@ export default function Post() {
 								previewResult.href ||
 								previewResult.toString() ||
 								previewResult;
-							console.log(
-								"Full image URL from getFilePreview:",
-								url
-							);
+							// console.log("Full image URL from getFilePreview:",url);
 							setImageUrl(url);
 						} else {
-							console.log("Both methods failed, using fallback");
+							// console.log("Both methods failed, using fallback");
 							setImageUrl(previewImage);
 							setImageError(true);
 						}
@@ -155,7 +146,8 @@ export default function Post() {
 				navigate("/");
 			}
 		} catch (error) {
-			console.log("Error deleting post: ", error);
+			// console.log("Error deleting post: ", error);
+			console.error("Error deleting post: ", error);
 			alert("Failed to delete post. Please try again.");
 		}
 	};
@@ -212,22 +204,13 @@ export default function Post() {
 							alt={post.title || "Blog Post Image"}
 							className="rounded-xl max-w-full h-auto max-h-96 object-contain"
 							onError={(e) => {
-								console.log(
-									"Full image failed to load, using fallback"
-								);
-								console.log("Failed URL was:", e.target.src);
+								// console.log("Full image failed to load, using fallback");
+								// console.log("Failed URL was:", e.target.src);
 								if (e.target.src !== previewImage) {
 									setImageError(true);
 									e.target.src = previewImage;
 								}
-							}}
-							onLoad={() => {
-								if (imageUrl !== previewImage && !imageError) {
-									console.log(
-										"Full image loaded successfully"
-									);
-								}
-							}}
+							}} // deleted onLoad method here
 						/>
 					)}
 

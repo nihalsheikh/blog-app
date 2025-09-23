@@ -21,17 +21,14 @@ function Home() {
 				setLoading(true);
 				setError(null);
 
-				console.log("Fetching posts for homepage...");
+				// console.log("Fetching posts for homepage...");
 				const response = await appwriteService.getPosts();
 
 				if (response && response.documents) {
-					console.log(
-						"Homepage posts fetched:",
-						response.documents.length
-					);
+					// console.log("Homepage posts fetched:",response.documents.length);
 					setPosts(response.documents);
 				} else {
-					console.log("No posts found for homepage");
+					// console.log("No posts found for homepage");
 					setPosts([]);
 				}
 			} catch (error) {

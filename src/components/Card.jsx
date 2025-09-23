@@ -22,7 +22,7 @@ function Card({ $id, title, featuredImage }) {
 				setImageLoading(true);
 				setImageError(false);
 
-				console.log("Fetching image for card: ", featuredImage);
+				// console.log("Fetching image for card: ", featuredImage);
 
 				let imageResult = null;
 
@@ -36,9 +36,10 @@ function Card({ $id, title, featuredImage }) {
 					imageResult = await appwriteService.getFileView(
 						featuredImage
 					);
-					console.log("getFileView successful for Card");
+					// console.log("getFileView successful for Card");
 				} catch (viewError) {
-					console.log(
+					// console.log("getFileView failed, trying getFilePreview:",viewError);
+					console.error(
 						"getFileView failed, trying getFilePreview:",
 						viewError
 					);
@@ -56,10 +57,10 @@ function Card({ $id, title, featuredImage }) {
 						imageResult.href ||
 						imageResult.toString() ||
 						imageResult;
-					console.log("Card image URL generated: ", url);
+					// console.log("Card image URL generated: ", url);
 					setImageSrc(url);
 				} else {
-					console.log("No image result, using fallback image");
+					// console.log("No image result, using fallback image");
 					setImageSrc(previewImage);
 					setImageError(true);
 				}
@@ -109,21 +110,12 @@ function Card({ $id, title, featuredImage }) {
 							alt={title || "Blog Post"}
 							className="rounded-xl w-full h-48 object-cover"
 							onError={(e) => {
-								console.log(
-									"Image failed to load in Card, using fallback"
-								);
+								// console.log("Image failed to load in Card, using fallback");
 								if (e.target.src !== previewImage) {
 									e.target.src = previewImage;
 									setImageError(true);
 								}
-							}}
-							onLoad={() => {
-								if (imageSrc !== previewImage && !imageError) {
-									console.log(
-										"Card image loaded successfully"
-									);
-								}
-							}}
+							}} // deleted onLoad method here
 						/>
 					)}
 				</div>

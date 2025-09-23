@@ -32,11 +32,11 @@ function EditPost() {
 					setLoading(true);
 					setError(null);
 
-					console.log("Fetching post for editing:", slug);
+					// console.log("Fetching post for editing:", slug);
 					const post = await appwriteService.getPost(slug);
 
 					if (post) {
-						console.log("Post fetched for editing:", post);
+						// console.log("Post fetched for editing:", post);
 						setPosts(post);
 					} else {
 						setError("Post not found");

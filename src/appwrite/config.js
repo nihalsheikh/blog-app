@@ -33,7 +33,8 @@ export class Service {
 				}
 			);
 		} catch (error) {
-			console.log("Appwrite service :: createPost :: error", error);
+			// console.log("Appwrite service :: createPost :: error", error);
+			console.error("Appwrite service :: createPost :: error", error);
 			throw error;
 		}
 	}
@@ -52,7 +53,8 @@ export class Service {
 				}
 			);
 		} catch (error) {
-			console.log("Appwrite service :: updatePost :: error", error);
+			// console.log("Appwrite service :: updatePost :: error", error);
+			console.error("Appwrite service :: updatePost :: error", error);
 			throw error;
 		}
 	}
@@ -67,7 +69,8 @@ export class Service {
 
 			return true;
 		} catch (error) {
-			console.log("Appwrite service :: deletePost :: error", error);
+			// console.log("Appwrite service :: deletePost :: error", error);
+			console.error("Appwrite service :: deletePost :: error", error);
 
 			return false;
 		}
@@ -81,7 +84,8 @@ export class Service {
 				slug
 			);
 		} catch (error) {
-			console.log("Appwrite service :: getPost :: error", error);
+			// console.log("Appwrite service :: getPost :: error", error);
+			console.error("Appwrite service :: getPost :: error", error);
 			return false;
 		}
 	}
@@ -94,7 +98,8 @@ export class Service {
 				queries
 			);
 		} catch (error) {
-			console.log("Appwrite service :: getPosts :: error", error);
+			// console.log("Appwrite service :: getPosts :: error", error);
+			console.error("Appwrite service :: getPosts :: error", error);
 			return false;
 		}
 	}
@@ -108,7 +113,8 @@ export class Service {
 				file
 			);
 		} catch (error) {
-			console.log("Appwrite method :: uploadFile :: error", error);
+			// console.log("Appwrite method :: uploadFile :: error", error);
+			console.error("Appwrite method :: uploadFile :: error", error);
 			// return false;
 			throw error;
 		}
@@ -119,7 +125,8 @@ export class Service {
 			await this.bucket.deleteFile(conf.appwriteBucketId, fileId);
 			return true;
 		} catch (error) {
-			console.log("Appwrite service :: deleteFile :: error", error);
+			// console.log("Appwrite service :: deleteFile :: error", error);
+			console.error("Appwrite service :: deleteFile :: error", error);
 			return false;
 		}
 	}
@@ -134,7 +141,7 @@ export class Service {
 
 			// return this.bucket.getFileView(conf.appwriteBucketId, fileId);
 
-			console.log(`Fetching file view for fileId: ${fileId}`);
+			// console.log(`Fetching file view for fileId: ${fileId}`);
 
 			const result = this.bucket.getFileView(
 				conf.appwriteBucketId,
@@ -143,7 +150,8 @@ export class Service {
 
 			return result;
 		} catch (error) {
-			console.log("Appwrite service :: getFileView :: error", error);
+			// console.log("Appwrite service :: getFileView :: error", error);
+			console.error("Appwrite service :: getFileView :: error", error);
 			console.error("Failed fileId:", fileId);
 			return null;
 		}
@@ -160,11 +168,11 @@ export class Service {
 		// return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
 		try {
 			if (!fileId || fileId.trim() === "") {
-				console.log("No fileId provided for preview");
+				// console.log("No fileId provided for preview");
 				return null;
 			}
 
-			console.log(`Fetching preview for fileId: ${fileId}`);
+			// console.log(`Fetching preview for fileId: ${fileId}`);
 
 			const result = await this.bucket.getFilePreview(
 				conf.appwriteBucketId,
@@ -184,7 +192,7 @@ export class Service {
 			// 	quality
 			// );
 
-			console.log("Preview result successful");
+			// console.log("Preview result successful");
 			return result;
 		} catch (error) {
 			console.error("getFilePreview failed, trying getFileView: ", error);
@@ -193,9 +201,7 @@ export class Service {
 				error.code === 403 ||
 				error.type === "storage_image_transformations_blocked"
 			) {
-				console.log(
-					"Image transformations blocked, using getFileView instead"
-				);
+				// console.log("Image transformations blocked, using getFileView instead");
 				return this.getFileView(fileId);
 			}
 
