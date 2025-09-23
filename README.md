@@ -3,7 +3,6 @@
 A full-featured blog application built with React, featuring user authentication, rich text editing, image uploads, and a modern responsive design. Built with Appwrite as the backend service.
 
 ## ✨ Features
-
 -   **User Authentication** - Secure login and registration system
 -   **Rich Text Editor** - TinyMCE integration for creating beautiful blog posts
 -   **Image Upload** - Featured image support with Appwrite Storage
@@ -16,7 +15,6 @@ A full-featured blog application built with React, featuring user authentication
 ## 🛠️ Tech Stack
 
 ### Frontend
-
 -   **React** - Modern JavaScript library for building user interfaces
 -   **Redux Toolkit** - State management
 -   **React Router Dom** - Client-side routing
@@ -26,7 +24,6 @@ A full-featured blog application built with React, featuring user authentication
 -   **HTML React Parser** - Parse HTML content safely
 
 ### Backend & Services
-
 -   **Appwrite** - Open-source backend as a service
     -   Authentication
     -   Storage (File uploads)
@@ -55,9 +52,3 @@ A full-featured blog application built with React, featuring user authentication
 -   TinyMCE integration for content creation
 -   HTML content parsing for safe rendering
 -   Responsive editor configuration
-
-## 🎨 UI/UX Features
--   **Loading States** - Smooth user experience with progress indicators
--   **Error Handling** - User-friendly error messages
--   **Form Validation** - Real-time feedback for user inputs
-
