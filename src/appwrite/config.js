@@ -124,9 +124,34 @@ export class Service {
 		}
 	}
 
-	getFilePreview(
+	async getFileView(fileId) {
+		// Using this method as only this is allowed in the free tier of appwrite
+		try {
+			if (!fileId || fileId.trim() === "") {
+				console.warn("No fileId provided for file view");
+				return null;
+			}
+
+			// return this.bucket.getFileView(conf.appwriteBucketId, fileId);
+
+			console.log(`Fetching file view for fileId: ${fileId}`);
+
+			const result = this.bucket.getFileView(
+				conf.appwriteBucketId,
+				fileId.trim()
+			);
+
+			return result;
+		} catch (error) {
+			console.log("Appwrite service :: getFileView :: error", error);
+			console.error("Failed fileId:", fileId);
+			return null;
+		}
+	}
+
+	async getFilePreview(
 		fileId,
-		width = 400,
+		width = 800,
 		height = 300,
 		gravity = "center",
 		quality = 100
@@ -134,35 +159,47 @@ export class Service {
 		// this method is not returning a promise, so no need for async-await
 		// return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
 		try {
-			if (!fileId) {
+			if (!fileId || fileId.trim() === "") {
 				console.log("No fileId provided for preview");
 				return null;
 			}
 
-			return this.bucket.getFilePreview(
+			console.log(`Fetching preview for fileId: ${fileId}`);
+
+			const result = await this.bucket.getFilePreview(
 				conf.appwriteBucketId,
-				fileId,
+				fileId.trim(),
 				width,
 				height,
 				gravity,
 				quality
 			);
-		} catch (error) {
-			console.log("Appwrite service :: getFilePreview :: error", error);
-			return null;
-		}
-	}
 
-	getFileView(fileId) {
-		try {
-			if (!fileId) {
-				console.warn("No fileId provided for file view");
-				return null;
+			// return this.bucket.getFilePreview(
+			// 	conf.appwriteBucketId,
+			// 	fileId,
+			// 	width,
+			// 	height,
+			// 	gravity,
+			// 	quality
+			// );
+
+			console.log("Preview result successful");
+			return result;
+		} catch (error) {
+			console.error("getFilePreview failed, trying getFileView: ", error);
+
+			if (
+				error.code === 403 ||
+				error.type === "storage_image_transformations_blocked"
+			) {
+				console.log(
+					"Image transformations blocked, using getFileView instead"
+				);
+				return this.getFileView(fileId);
 			}
 
-			return this.bucket.getFileView(conf.appwriteBucketId, fileId);
-		} catch (error) {
-			console.log("Appwrite service :: getFileView :: error", error);
+			console.error("Both preview and view failed:", error);
 			return null;
 		}
 	}
